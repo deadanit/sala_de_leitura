@@ -146,11 +146,11 @@
         if (limite++ > 50) return;
         const row = `<tr>
           <td>${livro.tombo}</td>
-          <td>${livro.titulo}</td>
-          <td>${livro.autor}</td>
-          <td>${livro.classificacao}</td>
-          <td>${livro.assunto}</td>
-          <td>${livro.localizacao}</td>
+          <td>${livro.titulo ?? ''}</td>
+          <td>${livro.autor ?? ''}</td>
+          <td>${livro.classificacao ?? ''}</td>
+          <td>${livro.assunto ?? ''}</td>
+          <td>${livro.localizacao ?? ''}</td>
         </tr>`;
         tbody.innerHTML += row;
       });
