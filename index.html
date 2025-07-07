@@ -107,7 +107,7 @@
 <body>
   <header>
     <h1>Consulta ao Acervo da Sala de Leitura</h1>
-    <p>Diretoria de Ensino</p>
+    <p>Diretoria de Ensino - Região de Adamantina</p>
   </header>
 
   <div class="container">
@@ -115,7 +115,7 @@
     <table id="booksTable">
       <thead>
         <tr>
-          <th>Tombo</th>
+          <th style="text-align: center">Tombo</th>
           <th>Título</th>
           <th>Autor</th>
           <th>Classificação</th>
@@ -145,7 +145,7 @@
       data.forEach((livro) => {
         if (limite++ > 50) return;
         const row = `<tr>
-          <td>${livro.tombo}</td>
+          <td style="text-align: center">${livro.tombo}</td>
           <td>${livro.titulo ?? ''}</td>
           <td>${livro.autor ?? ''}</td>
           <td>${livro.classificacao ?? ''}</td>
