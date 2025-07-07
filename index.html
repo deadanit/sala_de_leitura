@@ -131,11 +131,12 @@
 
   <script>
     let livros = [];
-    var limite = 50;
-
+    
     function renderTable(data) {
       const tbody = document.getElementById("tableBody");
       tbody.innerHTML = "";
+
+      var limite = 0;
 
       if (data.length === 0) {
         tbody.innerHTML = "<tr><td colspan='6'>Nenhum livro encontrado.</td></tr>";
