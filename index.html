@@ -124,7 +124,6 @@
         </tr>
       </thead>
       <tbody id="tableBody">
-        <tr><td colspan="6">Carregando acervo...</td></tr>
       </tbody>
     </table>
   </div>
@@ -160,9 +159,9 @@
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase();
       const filtered = livros.filter(livro =>
-        (String(livro.titulo ?? '')).toLowerCase().includes(input) ||
-        (String(livro.autor ?? '')).toLowerCase().includes(input) ||
-        (String(livro.assunto ?? '')).toLowerCase().includes(input)
+        (String(livro.titulo ?? '')).toLowerCase().trim().includes(input) ||
+        (String(livro.autor ?? '')).toLowerCase().trim().includes(input) ||
+        (String(livro.assunto ?? '')).toLowerCase().trim().includes(input)
       );
       renderTable(filtered);
     }
