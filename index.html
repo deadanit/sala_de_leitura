@@ -159,9 +159,9 @@
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase();
       const filtered = livros.filter(livro =>
-        livro.titulo?.toLowerCase().includes(input) ||
-        livro.autor?.toLowerCase().includes(input) ||
-        livro.assunto?.toLowerCase().includes(input)
+        (livro.titulo ?? '').toLowerCase().includes(input) ||
+        (livro.autor ?? '').toLowerCase().includes(input) ||
+        (livro.assunto ?? '').toLowerCase().includes(input)
       );
       renderTable(filtered);
     }
