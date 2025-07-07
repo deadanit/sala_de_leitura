@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acervo da Sala de Leitura</title>
+  <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -111,8 +112,8 @@
   </header>
 
   <div class="container">
-    <input type="text" id="searchInput" placeholder="Buscar por título, autor ou assunto..." onkeyup="filterTable()" />
-    <table id="booksTable">
+    <input type="text" id="searchInput" placeholder="Buscar por título, autor ou assunto..." oninput="searchLivros()" />
+    <table id="booksTable" style="display: none;">
       <thead>
         <tr>
           <th>Tombo</th>
@@ -124,24 +125,70 @@
         </tr>
       </thead>
       <tbody id="tableBody">
-        <tr><td colspan="6">Carregando acervo...</td></tr>
+        <!-- Resultados da busca -->
       </tbody>
     </table>
   </div>
 
   <script>
+    const index = new FlexSearch.Document({
+      tokenize: "forward",
+      cache: true,
+      document: {
+        id: "tombo",
+        index: ["titulo", "autor", "assunto"]
+      }
+    });
+
     let livros = [];
+
+    // Carregar livros e indexar
+    fetch("livros.json")
+      .then(res => res.json())
+      .then(data => {
+        livros = data;
+        index.add(data); // Indexa todos os livros
+      })
+      .catch(err => {
+        console.error("Erro ao carregar livros:", err);
+      });
+
+    function searchLivros() {
+      const termo = document.getElementById("searchInput").value.trim().toLowerCase();
+      const tabela = document.getElementById("booksTable");
+
+      if (termo === "") {
+        tabela.style.display = "none";
+        document.getElementById("tableBody").innerHTML = "";
+        return;
+      }
+
+      index.searchAsync(termo, { limit: 50 }).then(results => {
+        // Flatten results (pois FlexSearch retorna por campo)
+        const ids = new Set();
+        results.forEach(group => {
+          group.result.forEach(id => ids.add(id));
+        });
+
+        const encontrados = livros.filter(livro => ids.has(livro.tombo));
+        renderTable(encontrados);
+      });
+    }
 
     function renderTable(data) {
       const tbody = document.getElementById("tableBody");
-      tbody.innerHTML = "";
+      const tabela = document.getElementById("booksTable");
 
       if (data.length === 0) {
+        tabela.style.display = "table";
         tbody.innerHTML = "<tr><td colspan='6'>Nenhum livro encontrado.</td></tr>";
         return;
       }
 
-      data.forEach((livro) => {
+      tabela.style.display = "table";
+      tbody.innerHTML = "";
+
+      data.forEach(livro => {
         const row = `<tr>
           <td>${livro.tombo}</td>
           <td>${livro.titulo}</td>
@@ -153,28 +200,6 @@
         tbody.innerHTML += row;
       });
     }
-
-    function filterTable() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = livros.filter(livro =>
-        livro.titulo.toLowerCase().includes(input) ||
-        livro.autor.toLowerCase().includes(input) ||
-        livro.assunto.toLowerCase().includes(input)
-      );
-      renderTable(filtered);
-    }
-
-    fetch('livros.json')
-      .then(response => response.json())
-      .then(data => {
-        livros = data;
-        renderTable(livros);
-      })
-      .catch(error => {
-        console.error('Erro ao carregar livros:', error);
-        const tbody = document.getElementById("tableBody");
-        tbody.innerHTML = "<tr><td colspan='6'>Erro ao carregar acervo.</td></tr>";
-      });
   </script>
 </body>
 </html>
