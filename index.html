@@ -131,6 +131,7 @@
 
   <script>
     let livros = [];
+    var limite = 50;
 
     function renderTable(data) {
       const tbody = document.getElementById("tableBody");
@@ -142,6 +143,7 @@
       }
 
       data.forEach((livro) => {
+        if (limite++ > 50) return;
         const row = `<tr>
           <td>${livro.tombo}</td>
           <td>${livro.titulo}</td>
@@ -157,9 +159,9 @@
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase();
       const filtered = livros.filter(livro =>
-        livro.titulo.toLowerCase().includes(input) ||
-        livro.autor.toLowerCase().includes(input) ||
-        livro.assunto.toLowerCase().includes(input)
+        livro.titulo?.toLowerCase().includes(input) ||
+        livro.autor?.toLowerCase().includes(input) ||
+        livro.assunto?.toLowerCase().includes(input)
       );
       renderTable(filtered);
     }
