@@ -158,6 +158,13 @@
 
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase();
+
+      if(input == '')
+      {
+        renderTable([]);
+        return;
+      }
+      
       const filtered = livros.filter(livro =>
         (String(livro.titulo ?? '')).toLowerCase().trim().includes(input) ||
         (String(livro.autor ?? '')).toLowerCase().trim().includes(input) ||
