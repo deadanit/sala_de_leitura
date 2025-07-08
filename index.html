@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acervo da Sala de Leitura</title>
   <style>
-    @import url(\'https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Open+Sans:wght@300;400;500;600&display=swap\' );
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Open+Sans:wght@300;400;500;600&display=swap');
     
     body {
       font-family: "Open Sans", sans-serif;
@@ -15,13 +15,11 @@
       color: #2c3e50;
       min-height: 100vh;
       position: relative;
-      display: flex;
-      flex-direction: column;
     }
 
     /* Fundo decorativo com elementos escolares */
     body::before {
-      content: \'\';
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
@@ -47,7 +45,7 @@
 
     /* Decoração do header */
     header::before {
-      content: \'📚 ✏️ 🎓 📖 🌟\';
+      content: '📚 ✏️ 🎓 📖 🌟';
       position: absolute;
       top: 10px;
       left: 50%;
@@ -83,7 +81,6 @@
       margin-bottom: 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       backdrop-filter: blur(10px);
-      flex-grow: 1;
     }
 
     .search-section {
@@ -106,7 +103,7 @@
     }
 
     input[type="text"] {
-      width: calc(100% - 3rem);
+      width: 100%;
       max-width: 600px;
       padding: 1rem 1.5rem;
       margin-bottom: 1rem;
@@ -117,7 +114,6 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
       font-family: "Open Sans", sans-serif;
-      box-sizing: border-box; /* Adicionado para incluir padding e border na largura */
     }
 
     input[type="text"]:focus {
@@ -192,7 +188,7 @@
     }
 
     .no-results::before {
-      content: \'📚\';
+      content: '📚';
       display: block;
       font-size: 3rem;
       margin-bottom: 1rem;
@@ -279,7 +275,7 @@
     }
 
     .loading::before {
-      content: \'⏳\';
+      content: '⏳';
       display: block;
       font-size: 2rem;
       margin-bottom: 1rem;
@@ -368,6 +364,10 @@
     </div>
   </div>
 
+  <footer>
+    <p>Cantinho da Leitura organizado por Nives Cupelli - 2025</p>
+  </footer>
+
   <script>
     let livros = [];
     
@@ -378,13 +378,20 @@
       var limite = 0;
 
       if (data.length === 0) {
-        tbody.innerHTML = "<tr class=\'no-results\'><td colspan=\'6\'>Ops! Não encontramos nenhum livro com esses termos. Que tal tentar uma busca diferente?</td></tr>";
+        tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Ops! Não encontramos nenhum livro com esses termos. Que tal tentar uma busca diferente?</td></tr>";
         return;
       }
 
       data.forEach((livro) => {
         if (limite++ > 50) return;
-        const row = `<tr>\n          <td style=\"text-align: center\">${livro.tombo}</td>\n          <td>${livro.titulo ?? \'\'}</td>\n          <td>${livro.autor ?? \'\'}</td>\n          <td>${livro.classificacao ?? \'\'}</td>\n          <td>${livro.assunto ?? \'\'}</td>\n          <td>${livro.localizacao ?? \'\'}</td>\n        </tr>`;
+        const row = `<tr>
+          <td style="text-align: center">${livro.tombo}</td>
+          <td>${livro.titulo ?? ''}</td>
+          <td>${livro.autor ?? ''}</td>
+          <td>${livro.classificacao ?? ''}</td>
+          <td>${livro.assunto ?? ''}</td>
+          <td>${livro.localizacao ?? ''}</td>
+        </tr>`;
         tbody.innerHTML += row;
       });
     }
@@ -392,37 +399,34 @@
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase().trim();
 
-      if(input == \'\')
+      if(input == '')
       {
         const tbody = document.getElementById("tableBody");
-        tbody.innerHTML = "<tr class=\'no-results\'><td colspan=\'6\'>Digite algo na busca para encontrar os livros que você procura! 📚✨</td></tr>";
+        tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Digite algo na busca para encontrar os livros que você procura! 📚✨</td></tr>";
         return;
       }
       
       const filtered = livros.filter(livro =>
-        (String(livro.titulo ?? \'\')).toLowerCase().trim().includes(input) ||
-        (String(livro.autor ?? \'\')).toLowerCase().trim().includes(input) ||
-        (String(livro.assunto ?? \'\')).toLowerCase().trim().includes(input)
+        (String(livro.titulo ?? '')).toLowerCase().trim().includes(input) ||
+        (String(livro.autor ?? '')).toLowerCase().trim().includes(input) ||
+        (String(livro.assunto ?? '')).toLowerCase().trim().includes(input)
       );
       renderTable(filtered);
     }
 
-    fetch(\'livros.json\')
+    fetch('livros.json')
       .then(response => response.json())
       .then(data => {
         livros = data;
         // Inicializar com mensagem amigável
         const tbody = document.getElementById("tableBody");
-        tbody.innerHTML = "<tr class=\'no-results\'><td colspan=\'6\'>Pronto! Nossa biblioteca está carregada. Digite algo na busca para encontrar seus livros favoritos! 📚✨</td></tr>";
+        tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Pronto! Nossa biblioteca está carregada. Digite algo na busca para encontrar seus livros favoritos! 📚✨</td></tr>";
       })
       .catch(error => {
-        console.error(\'Erro ao carregar livros:\', error);
+        console.error('Erro ao carregar livros:', error);
         const tbody = document.getElementById("tableBody");
-        tbody.innerHTML = "<tr class=\'no-results\'><td colspan=\'6\'>Oops! Tivemos um probleminha ao carregar nossa biblioteca. Tente novamente em alguns instantes! 😊</td></tr>";
+        tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Oops! Tivemos um probleminha ao carregar nossa biblioteca. Tente novamente em alguns instantes! 😊</td></tr>";
       });
   </script>
-  <footer>
-    <p>Cantinho da Leitura organizado por Nives Cupelli em 2025</p>
-  </footer>
 </body>
 </html>
