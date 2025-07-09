@@ -744,6 +744,12 @@
         
         alert('✅ Livro atualizado com sucesso!');
       } else {
+        const livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == editandoIndex)[0] ?? -1;
+        if (livro_alterar != -1)
+        {
+          alert('❌ Já existe outro livro com o tombo informado!');
+          return;
+        }
         // Adicionando novo livro
         livros.push(novoLivro);
         alert('✅ Novo livro adicionado com sucesso!');
