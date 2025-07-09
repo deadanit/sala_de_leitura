@@ -789,7 +789,7 @@
         try {
           livros = JSON.parse(e.target.result);
           editandoIndex = -1;
-          renderTable(livros);
+          document.getElementById("searchInput").value = "";
           alert('✅ Acervo carregado com sucesso!');
         } catch (err) {
           alert('❌ Erro ao carregar o arquivo JSON. Verifique o conteúdo do arquivo.');
