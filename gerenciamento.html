@@ -636,7 +636,7 @@
           <td>${livro.assunto || ''}</td>
           <td>${livro.localizacao || ''}</td>
           <td class="action-cell">
-            <button class="btn btn-primary btn-small" onclick="editarLivro(${livro.tombo})">✏️ Editar</button>
+            <button class="btn btn-primary btn-small" onclick="editarLivro('${livro.tombo}')">✏️ Editar</button>
           </td>
         </tr>`;
         tbody.innerHTML += row;
