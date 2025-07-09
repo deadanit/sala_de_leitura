@@ -734,7 +734,7 @@
 
       if (editandoIndex != -1) {
         // Editando livro existente
-        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == novo.tombo)[0];
+        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == editandoIndex)[0];
         livro_alterar.tombo = novoLivro.tombo;
         livro_alterar.titulo = novoLivro.titulo;
         livro_alterar.autor = novoLivro.autor;
@@ -744,7 +744,7 @@
         
         alert('✅ Livro atualizado com sucesso!');
       } else {
-        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == editandoIndex)[0] ?? -1;
+        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == novoLivro.tombo)[0] ?? -1;
         if (livro_alterar != -1)
         {
           alert('❌ Já existe outro livro com o tombo informado!');
