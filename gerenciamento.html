@@ -672,6 +672,7 @@
         formContainer.classList.add('active');
         document.getElementById('formTitle').textContent = '📖 Adicionar Novo Livro';
         document.getElementById('livroForm').reset();
+        document.getElementById('tombo').focus();
         editandoIndex = -1;
       }
     }
@@ -692,6 +693,8 @@
       document.getElementById('localizacao').value = livro.localizacao || '';
       
       document.getElementById('formContainer').classList.add('active');
+
+      document.getElementById('titulo').focus();
     }
 
     // Excluir livro
