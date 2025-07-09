@@ -647,8 +647,10 @@
     function filterTable() {
       const input = document.getElementById("searchInput").value.toLowerCase().trim();
       
-      if(input == '') {
-        renderTable(livros);
+      if(input == '')
+      {
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Digite algo na busca para encontrar os livros que você procura! 📚✨</td></tr>";
         return;
       }
       
