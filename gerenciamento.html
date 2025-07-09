@@ -726,7 +726,14 @@
 
       if (editandoIndex != -1) {
         // Editando livro existente
-        livros[editandoIndex] = novoLivro;
+        const livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == index)[0];
+        livro_alterar.tombo = novoLivro.tombo;
+        livro_alterar.titulo = novoLivro.titulo;
+        livro_alterar.autor = novoLivro.autor;
+        livro_alterar.classificacao = novoLivro.classificacao;
+        livro_alterar.assunto = novoLivro.assunto;
+        livro_alterar.localizacao = novoLivro.localizacao;
+        
         alert('✅ Livro atualizado com sucesso!');
       } else {
         // Adicionando novo livro
