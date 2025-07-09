@@ -606,7 +606,7 @@
         .then(response => response.json())
         .then(data => {
           livros = data;
-          renderTable(livros);
+          //renderTable(livros);
           alert('✅ Acervo carregado com sucesso!');
         })
         .catch(error => {
@@ -620,12 +620,15 @@
       const tbody = document.getElementById("tableBody");
       tbody.innerHTML = "";
 
+      var limite = 0;
+
       if (data.length === 0) {
         tbody.innerHTML = "<tr class='no-results'><td colspan='7'>Nenhum livro encontrado. Adicione alguns livros ao acervo! 📚✨</td></tr>";
         return;
       }
 
       data.forEach((livro, index) => {
+        if (limite++ > 50) return;
         const row = `<tr>
           <td style="text-align: center">${livro.tombo || ''}</td>
           <td>${livro.titulo || ''}</td>
