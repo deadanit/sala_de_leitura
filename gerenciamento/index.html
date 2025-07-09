@@ -790,6 +790,7 @@
           livros = JSON.parse(e.target.result);
           editandoIndex = -1;
           document.getElementById("searchInput").value = "";
+          filterTable();
           alert('✅ Acervo carregado com sucesso!');
         } catch (err) {
           alert('❌ Erro ao carregar o arquivo JSON. Verifique o conteúdo do arquivo.');
