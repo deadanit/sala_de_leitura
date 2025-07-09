@@ -734,7 +734,7 @@
 
       if (editandoIndex != -1) {
         // Editando livro existente
-        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == editandoIndex)[0];
+        var livro_alterar = livros.filter(livro => (String(livro.tombo || '')) == novo.tombo)[0];
         livro_alterar.tombo = novoLivro.tombo;
         livro_alterar.titulo = novoLivro.titulo;
         livro_alterar.autor = novoLivro.autor;
