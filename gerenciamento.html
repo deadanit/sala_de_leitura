@@ -527,8 +527,7 @@
 
     <div class="action-buttons">
       <button class="btn btn-primary" onclick="toggleForm()">📖 Adicionar Novo Livro</button>
-      <button class="btn btn-success" onclick="carregarAcervo()">🔄 Carregar Acervo</button>
-      <button class="btn btn-warning" onclick="downloadJSON()">💾 Baixar JSON Atualizado</button>
+      <button class="btn btn-warning" onclick="downloadJSON()">💾 Baixar Dados Atualizados</button>
     </div>
 
     <!-- Formulário para adicionar/editar livros -->
@@ -637,8 +636,7 @@
           <td>${livro.assunto || ''}</td>
           <td>${livro.localizacao || ''}</td>
           <td class="action-cell">
-            <button class="btn btn-primary btn-small" onclick="editarLivro(${index})">✏️ Editar</button>
-            <button class="btn btn-warning btn-small" onclick="excluirLivro(${index})">🗑️ Excluir</button>
+            <button class="btn btn-primary btn-small" onclick="editarLivro(${livro.tombo})">✏️ Editar</button>
           </td>
         </tr>`;
         tbody.innerHTML += row;
@@ -680,6 +678,10 @@
 
     // Editar livro
     function editarLivro(index) {
+      const livro = livros.filter(livro =>
+        (String(livro.tombo || '')) == index;
+      )[0];
+      
       const livro = livros[index];
       editandoIndex = index;
       
