@@ -527,6 +527,8 @@
 
     <div class="action-buttons">
       <button class="btn btn-primary" onclick="toggleForm()">📖 Adicionar Novo Livro</button>
+      <button class="btn btn-success" onclick="document.getElementById('fileInput').click()">🔄 Carregar Acervo</button>
+      <input type="file" id="fileInput" accept=".json" style="display: none;" />
       <button class="btn btn-warning" onclick="downloadJSON()">💾 Baixar Dados Atualizados</button>
     </div>
 
@@ -776,6 +778,25 @@
       
       alert('✅ Arquivo JSON baixado com sucesso! Substitua o arquivo original no seu servidor.');
     }
+
+    // Carregar acervo de arquivo JSON local
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+  
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          livros = JSON.parse(e.target.result);
+          editandoIndex = -1;
+          renderTable(livros);
+          alert('✅ Acervo carregado com sucesso!');
+        } catch (err) {
+          alert('❌ Erro ao carregar o arquivo JSON. Verifique o conteúdo do arquivo.');
+        }
+      };
+      reader.readAsText(file);
+    });
 
     carregarAcervo();
   </script>
