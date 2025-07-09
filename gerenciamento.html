@@ -724,7 +724,7 @@
         localizacao: document.getElementById('localizacao').value
       };
 
-      if (editandoIndex >= 0) {
+      if (editandoIndex != -1) {
         // Editando livro existente
         livros[editandoIndex] = novoLivro;
         alert('✅ Livro atualizado com sucesso!');
