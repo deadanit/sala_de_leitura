@@ -607,7 +607,7 @@
         .then(data => {
           livros = data;
           //renderTable(livros);
-          alert('✅ Acervo carregado com sucesso!');
+          //alert('✅ Acervo carregado com sucesso!');
         })
         .catch(error => {
           console.error('Erro ao carregar livros:', error);
@@ -755,6 +755,8 @@
       
       alert('✅ Arquivo JSON baixado com sucesso! Substitua o arquivo original no seu servidor.');
     }
+
+    carregarAcervo();
   </script>
   
   <footer>
