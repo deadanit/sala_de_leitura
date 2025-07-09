@@ -329,6 +329,43 @@
     footer p {
       margin: 0;
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      backdrop-filter: blur(3px);
+    }
+    
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    
+    .close:hover {
+      color: #000;
+    }
   </style>
 </head>
 <body>
@@ -341,14 +378,7 @@
     <div class="search-section">
       <h2>Descubra Novos Mundos Através dos Livros</h2>
       <p>Digite o nome do livro, autor ou assunto que você gostaria de encontrar em nossa biblioteca.</p>
-      <div style="margin-top: 1.5rem; background: #edf2f7; padding: 1rem 1.5rem; border-radius: 12px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <p style="margin: 0.5rem 0; font-weight: 500; color: #2c3e50;">
-          📞 <strong>Telefone:</strong> (18) 3502-2325
-        </p>
-        <p style="margin: 0.5rem 0; font-weight: 500; color: #2c3e50;">
-          📧 <strong>E-mail:</strong> <a href="mailto:deadabib@educacao.sp.gov.br" style="color: #5a67d8;">deadabib@educacao.sp.gov.br</a>
-        </p>
-      </div>
+      <p>Encontrou o que procurava? <a href="#" onclick="mostrarContato()" style="color: #5a67d8; font-weight: 600;">Clique aqui</a> e entre em contato com a nossa biblioteca para mais informações.</p>
     </div>
     
     <input type="text" id="searchInput" placeholder="🔍 Digite sua busca..." onkeyup="filterTable()" />
@@ -437,6 +467,23 @@
         const tbody = document.getElementById("tableBody");
         tbody.innerHTML = "<tr class='no-results'><td colspan='6'>Oops! Tivemos um probleminha ao carregar nossa biblioteca. Tente novamente em alguns instantes! 😊</td></tr>";
       });
+
+    function mostrarContato() {
+      document.getElementById('contatoModal').style.display = 'block';
+    }
+    
+    function fecharContato() {
+      document.getElementById('contatoModal').style.display = 'none';
+    }
   </script>
+
+  <div id="contatoModal" class="modal" onclick="fecharContato()">
+  <div class="modal-content" onclick="event.stopPropagation()" style="text-align: center;">
+    <span class="close" onclick="fecharContato()">&times;</span>
+    <h2>📚 Contato da Biblioteca</h2>
+    <p style="font-size: 1.1rem; margin-top: 1rem;">📞 <strong>Telefone:</strong> (18) 3502-2325</p>
+    <p style="font-size: 1.1rem;">📧 <strong>E-mail:</strong> <a href="mailto:deadabib@educacao.sp.gov.br" style="color: #5a67d8;">deadabib@educacao.sp.gov.br</a></p>
+  </div>
+  </div>
 </body>
 </html>
