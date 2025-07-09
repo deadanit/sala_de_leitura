@@ -603,7 +603,7 @@
 
     // Carregar acervo do arquivo JSON
     function carregarAcervo() {
-      fetch('livros.json')
+      fetch('../livros.json')
         .then(response => response.json())
         .then(data => {
           livros = data;
