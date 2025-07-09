@@ -674,6 +674,7 @@
         formContainer.classList.add('active');
         document.getElementById('formTitle').textContent = '📖 Adicionar Novo Livro';
         document.getElementById('livroForm').reset();
+        document.getElementById('tombo').readOnly = false;
         document.getElementById('tombo').focus();
         editandoIndex = -1;
       }
@@ -685,6 +686,8 @@
         (String(livro.tombo || '')) == index)[0];
       
       editandoIndex = index;
+
+      document.getElementById('tombo').readOnly = true;
       
       document.getElementById('formTitle').textContent = '✏️ Editar Livro';
       document.getElementById('tombo').value = livro.tombo || '';
