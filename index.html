@@ -471,16 +471,16 @@
       paginacao.appendChild(btnAnterior);
     }
 
-    const paginaInfo = document.createElement("span");
-    paginaInfo.textContent = ` Página ${pagina} de ${totalPaginas} `;
-    paginacao.appendChild(paginaInfo);
-
     if (pagina < totalPaginas) {
       const btnProxima = document.createElement("button");
       btnProxima.textContent = "Próxima ➡";
       btnProxima.onclick = () => renderTable(livrosFiltrados, pagina + 1);
       paginacao.appendChild(btnProxima);
     }
+
+    const paginaInfo = document.createElement("span");
+    paginaInfo.textContent = ` Página ${pagina} de ${totalPaginas} `;
+    paginacao.appendChild(paginaInfo);
   }
 
   let livrosFiltrados = [];
