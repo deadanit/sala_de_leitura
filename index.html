@@ -464,6 +464,12 @@
 
     if (totalPaginas <= 1) return;
 
+    const paginaInfo = document.createElement("span");
+    paginaInfo.textContent = ` Página ${pagina} de ${totalPaginas} `;
+    paginacao.appendChild(paginaInfo);
+    paginacao.appendChild(document.createElement("br"));
+    paginacao.appendChild(document.createElement("br"));
+
     if (pagina > 1) {
       const btnAnterior = document.createElement("button");
       btnAnterior.textContent = "⬅ Anterior";
@@ -477,11 +483,6 @@
       btnProxima.onclick = () => renderTable(livrosFiltrados, pagina + 1);
       paginacao.appendChild(btnProxima);
     }
-
-    const paginaInfo = document.createElement("span");
-    paginaInfo.textContent = ` Página ${pagina} de ${totalPaginas} `;
-    paginacao.appendChild(document.createElement("br"));
-    paginacao.appendChild(paginaInfo);
   }
 
   let livrosFiltrados = [];
