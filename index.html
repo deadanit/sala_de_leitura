@@ -479,7 +479,8 @@
     }
 
     const paginaInfo = document.createElement("span");
-    paginaInfo.textContent = ` <br>Página ${pagina} de ${totalPaginas} `;
+    paginaInfo.textContent = ` Página ${pagina} de ${totalPaginas} `;
+    paginacao.appendChild(document.createElement("br"));
     paginacao.appendChild(paginaInfo);
   }
 
